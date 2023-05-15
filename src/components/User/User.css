@@ -1,0 +1,36 @@
+.user {
+    display: flex;
+    flex-direction: row;
+    border-top: 1px solid rgba(134, 150, 160, 0.15);
+    justify-content: space-between;
+}
+
+.user__wrap {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.user__info {
+    display: flex;
+    flex-direction: column;
+}
+
+.user__avatar {
+    width: 49px;
+    height: 49px;
+    padding: 0 15px;
+}
+
+.user__contact {
+    color: rgb(233 237 239);
+}
+
+.user__message {
+    width: 348px;
+    height: 20px;
+    color: rgb(233 237 239);
+    text-overflow: ellipsis;
+    overflow: hidden !important;
+}

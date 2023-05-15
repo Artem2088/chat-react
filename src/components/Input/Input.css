@@ -1,0 +1,30 @@
+.input {
+    background-color: rgb(32 44 51);
+    padding: 5px 2px;
+    width: 100%;
+}
+
+.input__wrap {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.input__field {
+    padding: 9px 12px;
+    margin: 5px 8px;
+    width: 860px;
+    border: none;
+    border-radius: 8px;
+    background-color: rgb(42 57 66);
+    outline: none;
+}
+
+.input__button {}
+
+.input__image {
+    width: 24px;
+    height: 24px;
+}

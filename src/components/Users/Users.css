@@ -1,0 +1,12 @@
+.users {
+    width: 452px;
+    max-width: 100%;
+}
+
+.users__list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: rgb(17 27 33);
+    border-right: 1px solid rgba(134, 150, 160, 0);
+}

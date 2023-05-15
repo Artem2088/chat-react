@@ -1,0 +1,71 @@
+.header {
+    max-width: 100%;
+    background-color: rgba(32, 44, 51, 1);
+}
+
+.header__wrap {
+    display: flex;
+    flex-direction: row;
+}
+
+.header-user {
+    width: 403px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-user__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.header__allContacts {
+    color: rgb(233 237 239);
+    border: 1px solid rgba(134, 150, 160, 0.15);
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.header-user__button {}
+
+.header-newUser__wrap {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-newUser {
+    width: 983px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-left: 1px solid rgba(134, 150, 160, 0.15);
+
+}
+
+.header-newUser__avatar {
+    width: 40px;
+    height: 40px;
+    padding-right: 15px;
+}
+
+.header-newUser__contact {
+    color: rgb(233 237 239);
+}
+
+.header-user__message {
+    width: 24px;
+    height: 24px;
+}
+
+.header-newUser__login {
+    color: rgb(233 237 239);
+    border: 1px solid rgba(134, 150, 160, 0.15);
+    border-radius: 15px;
+    padding: 10px;
+}
