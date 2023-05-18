@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/chat-react/static/css/main.a2825e15.css",
+    "main.js": "/chat-react/static/js/main.4e2dca56.js",
+    "static/media/message.svg": "/chat-react/static/media/message.28cc04615432a5854fa15b0b2360f72b.svg",
+    "static/media/send.svg": "/chat-react/static/media/send.35fb2c35468a23d773f2918ea86e7810.svg",
+    "index.html": "/chat-react/index.html",
+    "main.a2825e15.css.map": "/chat-react/static/css/main.a2825e15.css.map",
+    "main.4e2dca56.js.map": "/chat-react/static/js/main.4e2dca56.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a2825e15.css",
+    "static/js/main.4e2dca56.js"
+  ]
+}
