@@ -4,10 +4,13 @@
     font-family: SegoeUI, sans-serif;
     font-weight: 400;
     background-color: rgba(17, 27, 33, 1);
+
 }
 
 .page__container {
     width: 100%;
     max-width: 1440px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
 }

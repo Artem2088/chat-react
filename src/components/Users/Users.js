@@ -1,13 +1,16 @@
-import { useState } from "react";
 import User from "../User/User";
 import "./Users.css";
 
-const Users = ({ onGetAllContacts }) => {
+const Users = ({ newUser, onGetHistoryMsg }) => {
   return (
     <div className='users'>
       <ul className='users__list'>
-        {onGetAllContacts.map((item) => (
-          <User key={item.id} item={item} />
+        {newUser.map((each) => (
+          <User
+            key={each.chatId}
+            each={each}
+            onGetHistoryMsg={onGetHistoryMsg}
+          />
         ))}
       </ul>
     </div>

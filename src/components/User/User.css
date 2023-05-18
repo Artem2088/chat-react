@@ -3,6 +3,9 @@
     flex-direction: row;
     border-top: 1px solid rgba(134, 150, 160, 0.15);
     justify-content: space-between;
+    padding: 5px 0;
+    width: 100%;
+    cursor: pointer;
 }
 
 .user__wrap {
@@ -21,6 +24,7 @@
     width: 49px;
     height: 49px;
     padding: 0 15px;
+    border-radius: 50%;
 }
 
 .user__contact {

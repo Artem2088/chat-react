@@ -1,0 +1,35 @@
+.message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 580px;
+    padding: 6px 9px;
+    background-color: rgb(0 92 75);
+    border-radius: 7.5px;
+    margin: 0 0 0 380px;
+    box-sizing: border-box;
+    overflow: auto;
+}
+
+.message-incom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 580px;
+    padding: 6px 9px;
+    background-color: rgb(57, 58, 58);
+    border-radius: 7.5px;
+    margin: 0 0 0 19px;
+    box-sizing: border-box;
+    overflow: auto;
+}
+
+.message__text {
+    margin: 0;
+    line-height: 19px;
+    font-weight: 400;
+    font-style: normal;
+    color: rgb(233 237 239);
+}

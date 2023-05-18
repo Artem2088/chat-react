@@ -1,11 +1,16 @@
 import Input from "../Input/Input";
+import MessageEach from "../MessageEach/MessageEach";
 import "./MessageField.css";
 
-const MessageField = () => {
+const MessageField = ({ historyMsg, onCreateMessage }) => {
   return (
     <div className='messageField'>
-      <div className='messagefield__wrap'></div>
-      <Input />
+      <ul className='messagefield__wrap'>
+        {historyMsg.map((item) => (
+          <MessageEach key={item.idMessage} item={item} />
+        ))}
+      </ul>
+      <Input onCreateMessage={onCreateMessage} />
     </div>
   );
 };

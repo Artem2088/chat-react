@@ -1,10 +1,12 @@
 .messageField {
     width: 100%;
-
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    box-sizing: border-box;
+    transition: background .3s ease-out .1s;
+
 }
 
 .messagefield__wrap {
@@ -12,4 +14,9 @@
     max-width: 100%;
     height: 780px;
     background-color: rgb(108 108 108);
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    padding-bottom: 8px;
+    gap: 10px;
 }

@@ -5,24 +5,50 @@ import Main from "../Main/Main";
 import "./App.css";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import * as Api from "../../utils/Api";
-import { context } from "../../context/context";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import Loader from "../Loader/Loader";
 
 const App = () => {
   const navigate = useNavigate();
   const [auth, setIsAuth] = useState(false);
   const [userId, setUserId] = useState();
-  const [userToken, setUserToken] = useState("");
+  const [userToken, setUserToken] = useState();
   const [userAvatar, setAvatar] = useState();
-  const [allContactsId, setAllContactsId] = useState([]);
-  const [flagId, setIsFlagId] = useState(false);
+  const [newUser, setNewUser] = useState([]);
+  const [idForMsg, setIdForMsg] = useState("");
+  const [historyMsg, setHistoryMsg] = useState([]);
+  const [receive, setResive] = useState(false);
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
-    setUserId(localStorage.getItem("id"));
-    setUserToken(localStorage.getItem("token"));
-  }, []);
+    if (historyMsg.length == 0) {
+      return;
+    } else {
+      receiveNotific();
+      getHistoryMsg();
+    }
+  }, [receive, historyMsg]);
 
-  const getInfo = (id, token) => {
-    Api.getUserInfo(id, token)
+  const getNumber = (id, token) => {
+    setLoading(true);
+    Api.getNumber(id, token)
+      .then((res) => {
+        let data = res.wid;
+        getInfo(data, id, token);
+        setUserId(id);
+        setUserToken(token);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const getInfo = (userId, userToken, data) => {
+    setLoading(true);
+    Api.getUserInfo(userId, userToken, data)
       .then((res) => {
         navigate("/");
         setAvatar(localStorage.setItem("avatar", res.avatar));
@@ -30,64 +56,144 @@ const App = () => {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
-  const getContactsAll = () => {
-    Api.getAllContacts(userId, userToken)
+  const createNewUser = (value) => {
+    setLoading(true);
+    Api.createUser(userId, userToken, value)
       .then((res) => {
-        setAllContactsId(res);
+        setIdForMsg(value);
+        setNewUser([...newUser, res]);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const createMessage = (value) => {
+    setLoading(true);
+    Api.createMsg(userId, userToken, idForMsg, value)
+      .then((res) => {
+        setHistoryMsg([...historyMsg, value], res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const getHistoryMsg = () => {
+    setLoading(true);
+    Api.getHistoriMessage(userId, userToken, idForMsg)
+      .then((res) => {
+        setHistoryMsg(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const receiveNotific = () => {
+    setLoading(true);
+    Api.receiveNotification(userId, userToken)
+      .then((res) => {
+        setResive(true);
+        if (!res.body.messageData.textMessageData) {
+          setHistoryMsg(historyMsg);
+        }
+        setHistoryMsg([
+          ...historyMsg,
+          res.body.messageData.textMessageData.textMessage,
+        ]);
+        deleteReadMessage(res.receiptId);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const deleteReadMessage = (coutnId) => {
+    Api.deleteMesssage(userId, userToken, coutnId)
+      .then((res) => {
+        console.log(res);
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  // const handleLogOut = () => {
-  //   Api.logOut(userId, userToken)
-  //     .then(() => {
-  //       navigate("/login");
-  //       setIsAuth(false);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
+  const handleLogOut = () => {
+    Api.logOut(userId, userToken)
+      .then(() => {
+        navigate("/login");
+        setIsAuth(false);
+        localStorage.clear();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
-    <context.Provider value={""}>
-      <div className='page'>
-        <div className='page__container'>
+    <div className='page'>
+      <div className='page__container'>
+        {isLoading ? (
+          <Loader />
+        ) : (
           <Routes>
             <Route
+              exact
               path='/login'
               element={
                 <Login
-                  onLogin={getInfo}
+                  onLogin={getNumber}
                   setUserId={setUserId}
                   setUserToken={setUserToken}
                 />
               }
             />
             <Route
-              exact
               path='/'
               element={
                 <>
-                  <Header
-                    // onLogOut={handleLogOut}
+                  <ProtectedRoute
+                    auth={auth}
+                    component={Header}
+                    onLogOut={handleLogOut}
+                    onCreateUser={createNewUser}
                     avatar={localStorage.getItem("avatar")}
-                    onGetAllContacts={getContactsAll}
                   />
-                  <Main onGetAllContacts={allContactsId} />
+                  <ProtectedRoute
+                    auth={auth}
+                    component={Main}
+                    newUser={newUser}
+                    onGetHistoryMsg={getHistoryMsg}
+                    historyMsg={historyMsg}
+                    onCreateMessage={createMessage}
+                  />
                 </>
               }
             />
             <Route path='*' element={<Navigate to={auth ? "/login" : "/"} />} />
           </Routes>
-        </div>
+        )}
       </div>
-    </context.Provider>
+    </div>
   );
 };
 

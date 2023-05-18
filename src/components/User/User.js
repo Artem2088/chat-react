@@ -1,19 +1,15 @@
 import "./User.css";
 
-const User = ({ item }) => {
+const User = ({ each, onGetHistoryMsg }) => {
   return (
-    <div className='user'>
+    <button className='user' onClick={onGetHistoryMsg} type='submit'>
       <div className='user__wrap'>
-        <img src='' alt='аватар' className='user__avatar' />
+        <img src={each.avatar} alt='аватар' className='user__avatar' />
         <div className='user__info'>
-          <span className='user__contact'>{item.name}</span>
-          <span className='user__message'>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur
-            libero ex voluptas vero nam. Eligendi deleniti culpa illum debitis,
-          </span>
+          <span className='user__contact'>{each.name}</span>
         </div>
       </div>
-    </div>
+    </button>
   );
 };
 

@@ -16,8 +16,6 @@ const Login = ({ onLogin }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onLogin(id, token);
-    localStorage.setItem("id", id);
-    localStorage.setItem("token", token);
   };
 
   return (
